@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import nikhil.bean.Customer;
 
-public class App {
+public class JsonToJava {
     public static void main(String[] args) {
 
     	//use object mapper calss
