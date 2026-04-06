@@ -19,8 +19,8 @@ public class Java2JsonApp {
     public static void main(String[] args) throws StreamWriteException, DatabindException, IOException {
     	
     	Order ord1 = new Order(123,"laptop",true,"good");
-    	Order ord2 = new Order(456,"phone",true,"best");
-    	Order ord3 = new Order(789,"ram",false,"okk");
+    	Order ord2 = new Order(null,"phone",true,"best");
+    	Order ord3 = new Order(789,"",false,"okk");
     	
     	Account account = new Account("14568","AXIS",new BigDecimal(123664.55));
     	
@@ -30,7 +30,14 @@ public class Java2JsonApp {
     	
     	//use jackson api and convert java object to json
     	ObjectMapper mapper = new ObjectMapper();
+    	//good output not in single line
     	mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    	//enable root elemet
+    	mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+    	
+    	
+    	String valueAsString = mapper.writeValueAsString(person);
+    	System.out.println(valueAsString);
     	
     	mapper.writeValue(new File("src/main/resources/person.json"), person);
     	System.out.println("serialization is complete.......");
