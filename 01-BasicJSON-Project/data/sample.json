@@ -1,0 +1,12 @@
+{
+	"id":10,
+	"firstName"  :"Kunal",
+	"lastName"   :"yadav",
+	"active"     :true,
+	"address"    :{
+					"cityName"   : "gurugram",
+					"stateName"  : "Haryana",
+					"countryName":"India"
+				},
+	"friendsName":["nikhil","kartik","sachin","pankaj"]
+}
