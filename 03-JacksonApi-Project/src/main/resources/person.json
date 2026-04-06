@@ -1,9 +1,8 @@
 {
   "person" : {
     "first_name" : "Sachin",
-    "last_name" : "ysdav",
-    "dob" : 1775516134797,
-    "emailId" : "sachin@123",
+    "last_name" : "yadav",
+    "dob" : "07-04-2026 04:47:01",
     "orders" : [ {
       "oid" : 123,
       "name" : "laptop",
@@ -17,11 +16,6 @@
       "oid" : 789,
       "delivered" : false,
       "desc" : "okk"
-    } ],
-    "account" : {
-      "accounNumber" : "14568",
-      "bankName" : "AXIS",
-      "balance" : 123664.550000000002910383045673370361328125
-    }
+    } ]
   }
 }

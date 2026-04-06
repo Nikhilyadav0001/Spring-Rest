@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +25,7 @@ public class Java2JsonApp {
     	
     	Account account = new Account("14568","AXIS",new BigDecimal(123664.55));
     	
-    	Person person = new Person("Sachin","ysdav","sachin@123",
+    	Person person = new Person("Sachin","yadav","sachin@123",
     						new Date(),
     						List.of(ord1,ord2,ord3),account);
     	
@@ -34,6 +35,9 @@ public class Java2JsonApp {
     	mapper.enable(SerializationFeature.INDENT_OUTPUT);
     	//enable root elemet
     	mapper.enable(SerializationFeature.WRAP_ROOT_VALUE);
+    	
+    	//you can also do it in this way or use include 
+    	mapper.setSerializationInclusion(Include.NON_NULL);
     	
     	
     	String valueAsString = mapper.writeValueAsString(person);

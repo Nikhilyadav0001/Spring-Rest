@@ -5,8 +5,8 @@ import java.io.IOException;
 
 import com.fasterxml.jackson.core.exc.StreamWriteException;
 import com.fasterxml.jackson.databind.DatabindException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
 
 import nikhil.bean.Person;
 
@@ -15,7 +15,7 @@ public class Json2Java {
     	
     	//use jackson api and convert json to java
     	ObjectMapper mapper = new ObjectMapper();
-    	mapper.enable(SerializationFeature.INDENT_OUTPUT);
+    	mapper.enable(DeserializationFeature.UNWRAP_ROOT_VALUE);
     	
     	Person person = mapper.readValue(new File("src/main/resources/person.json"), Person.class);
 
