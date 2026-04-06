@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<person>
+    <address>
+        <city>Gurugram</city>
+        <country>India</country>
+        <state>Haruana</state>
+    </address>
+    <email>nikhil@123</email>
+    <gender>Male</gender>
+    <id>1</id>
+    <name>Nikhil</name>
+</person>
