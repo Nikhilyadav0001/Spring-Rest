@@ -48,10 +48,10 @@ public class UserRestController {
 		return new ResponseEntity<>(list, HttpStatus.OK);	
 	}
 	/*
-	 * R.T    : ResponseEntity<List<Role>>
+	 * R.T    : ResponseEntity<Map<String,Role>>
 	 * INPUT  : No input
 	 * METHOD : GET
-	 * PATH  : /list 
+	 * PATH  : /map
 	 */
 	@GetMapping("/map")
 	public ResponseEntity<Map<String,Role>> getMapDetails(){
