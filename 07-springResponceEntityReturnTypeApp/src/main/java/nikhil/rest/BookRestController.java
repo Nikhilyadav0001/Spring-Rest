@@ -48,7 +48,4 @@ public class BookRestController {
 		// return new ResponseEntity(Book,HttpStatus.OK);
 		return new Book(10,"HIBERNATE",6000.0); 
 	}
-	
-	
-
 }
