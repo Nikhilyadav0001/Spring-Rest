@@ -3,22 +3,16 @@ package hr.runner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import hr.Application;
 import hr.entity.Book;
 
 @Component
 public class GetRunner implements CommandLineRunner {
-
-	private final Application application;
-
-	GetRunner(Application application) {
-		this.application = application;
-	}
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -28,8 +22,19 @@ public class GetRunner implements CommandLineRunner {
 		//creation of rest template object
 		RestTemplate template = new RestTemplate();
 		
-		ResponseEntity<String> response1 = template.getForEntity(URL1, String.class);
-	
+		
+		
+		//CASE1: send the request to the URL :: getForEntity(URL,ResponseType)
+		/*
+		ResponseEntity<String> response1 = template.getForEntity(URL1, String.class); 
+		 */
+		ResponseEntity<String> response1 = template.exchange(
+					URL1,   //url
+					HttpMethod.GET, //method
+					null, // http entity object to send
+					String.class); //return type
+									//if path varibles are there then those came after
+		
 		// Reading the response details from the object
 		System.out.println(response1.getBody());
 		System.out.println(response1.getHeaders());
@@ -37,8 +42,21 @@ public class GetRunner implements CommandLineRunner {
 
 		System.out.println("**********************************************");
 
-		final String URL2 = "http://localhost:9999/v1/api/book/showB/10/nikhil";
+		final String URL2 = "http://localhost:9999/v1/api/book/showB/{id}/{name}";
+		
+		/*
 		ResponseEntity<String> response2 = template.getForEntity(URL2, String.class);
+		 
+		 */
+		
+		ResponseEntity<String> response2 = template.exchange(
+				URL2, 
+				HttpMethod.GET, 
+				null, 
+				String.class,
+				10,
+				"microservices");
+		
 		
 		// Reading the response details from the object
 		System.out.println(response2.getBody());
@@ -48,11 +66,21 @@ public class GetRunner implements CommandLineRunner {
 		System.out.println("**********************************************");
 	
 		final String URL3 = "http://localhost:9999/v1/api/book/showC/{id}";
+		
+		//case2 : send the request to the URL :: getForEntity(URL,ResponseType,Object...)
+		/*
 		ResponseEntity<Book> response3 = template.getForEntity(
 				URL3,        //url details
 				Book.class,  //ResponseEntity
 				1            //pathVariable
 				);
+		 */
+		ResponseEntity<Book> response3 = template.exchange(
+				URL3,
+				HttpMethod.GET,
+				null,
+				Book.class,
+				25);
 		
 		// Reading the response details from the object
 		System.out.println(response3.getBody());
@@ -64,6 +92,9 @@ public class GetRunner implements CommandLineRunner {
 		//sending request for post mapping
 		// 1. Creating a header section
 		final String URL4 = "http://localhost:9999/v1/api/book/showD";
+		
+		
+		//CASE3: 	request for PostMethod :: postForEntity(URL,HttpEntity,returnType)
 		HttpHeaders headers = new HttpHeaders();
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
@@ -76,13 +107,70 @@ public class GetRunner implements CommandLineRunner {
 				+ "}";
 		HttpEntity<String> entity = new HttpEntity<>(body, headers);
 		
+		/*
 		ResponseEntity<String> response4 = template.postForEntity(URL4, entity, String.class);
-		// Reading the response details from the object
+		 */
+		
+		// Sending a request for POST METHOD
+		ResponseEntity<String> response4 = template.exchange(
+				URL4, 
+				HttpMethod.POST, 
+				entity, 
+				String.class);
+		
+		 // Reading the response details from the object
 		System.out.println(response4.getBody());
 		System.out.println(response4.getHeaders());
 		System.out.println(response4.getStatusCode().value());
 		
+		System.out.println("****************************************************");
 		
+		//Case4: Sending PUT request using exchange(,,,,)
+		final String URL5 = "http://localhost:9999/v1/api/book/showE";
+		
+		HttpHeaders headers2 = new HttpHeaders();
+		headers2.setContentType(MediaType.APPLICATION_JSON);
+		
+		String jsonbody = "{\r\n"
+				+ "    \"bid\": 25,\r\n"
+				+ "    \"bname\": \"Microservices\",\r\n"
+				+ "    \"bauth\": \"Nikhil\",\r\n"
+				+ "    \"bcost\": 5000.0\r\n"
+				+ "}";
+		
+		HttpEntity<String> entity2 = new HttpEntity<>(jsonbody,headers2);
+		
+		ResponseEntity<String> response5 = template.exchange(
+				 URL5,
+				 HttpMethod.PUT,
+				 entity2,
+				 String.class
+				);
+		
+		// Reading the response details from the object
+		System.out.println(response5.getBody());
+		System.out.println(response5.getHeaders());
+		System.out.println(response5.getStatusCode().value());
+		
+		
+		System.out.println("****************************************************");
+		
+		//Case5 : Sending DELETE request using exchange(,,,,,,)
+		final String URL6 = "http://localhost:9999/v1/api/book/showF/{id}";
+		
+		ResponseEntity<String> response6 = template.exchange(
+				URL6, 
+				HttpMethod.DELETE, 
+				null, 
+				String.class,
+				10);
+		
+		// Reading the response details from the object
+		System.out.println(response6.getBody());
+		System.out.println(response6.getHeaders());
+		System.out.println(response6.getStatusCode().value());
+		
+
 	
 	
 	}
