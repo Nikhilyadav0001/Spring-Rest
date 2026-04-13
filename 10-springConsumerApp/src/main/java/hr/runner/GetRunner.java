@@ -169,10 +169,6 @@ public class GetRunner implements CommandLineRunner {
 		System.out.println(response6.getBody());
 		System.out.println(response6.getHeaders());
 		System.out.println(response6.getStatusCode().value());
-		
-
-	
-	
 	}
 
 }
