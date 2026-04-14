@@ -42,10 +42,10 @@ public class StudentRestControllerTest {
 	@Order(1)
 	public void createStudentTest() throws Exception {
 		String body="{\n"
-				+ "    \"stdName\": \"Sher\",\n"
-				+ "    \"stdGen\": \"Male\",\n"
-				+ "    \"stdCourse\": \"Bakwad\",\n"
-				+ "    \"stdAddr\": \"Up\"\n"
+				+ "    \"stdName\": \"XYZ\",\n"
+				+ "    \"stdGen\": \"Femail\",\n"
+				+ "    \"stdCourse\": \"ABC\",\n"
+				+ "    \"stdAddr\": \"HR\"\n"
 				+ "}";
 		
 		// 1. Create a dummy request object[M.T,URL,C.T,C.B]
@@ -69,34 +69,109 @@ public class StudentRestControllerTest {
 	}
 		
 		
-		@Test
-		@DisplayName("GETTING STUDENT OBJECT")
-		@Order(2)
-		public void testGetStudent() throws Exception {
-			
-			// 1. Create a dummy request object[M.T,URL,C.T,C.B]
-			MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+	@Test
+	@DisplayName("GETTING STUDENT OBJECT")
+	@Order(2)
+	public void testGetStudent() throws Exception {
+		
+		// 1. Create a dummy request object[M.T,URL,C.T,C.B]
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
 				.get("http://localhost:9999/v1/api/student/find/{id}",1);
-				
-
-			// 2. Send the request and get the response
-			MvcResult result = mockMvc.perform(request).andReturn();
-
-			// 3. Retrieve the data from request object to peform testing
-			MockHttpServletResponse response = result.getResponse();
-
-			// 4. use JUNIT to test wheter the testcase is pass|fail
-			assertEquals(HttpStatus.OK.value(), response.getStatus());
-			assertNotNull(response.getContentAsString());
-			String output = response.getContentAsString();
-			System.out.println(output);
-			assertEquals(MediaType.APPLICATION_JSON_VALUE, response.getContentType());
-		}
 		
 		
+		// 2. Send the request and get the response
+		MvcResult result = mockMvc.perform(request).andReturn();
 		
+		// 3. Retrieve the data from request object to peform testing
+		MockHttpServletResponse response = result.getResponse();
 		
-		
+		// 4. use JUNIT to test wheter the testcase is pass|fail
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+		assertNotNull(response.getContentAsString());
+		String output = response.getContentAsString();
+		System.out.println(output);
+		assertEquals(MediaType.APPLICATION_JSON_VALUE, response.getContentType());
+	}
 	
+	@Test
+	@DisplayName("GETTING ALL STUDENT DETAIlS")
+	@Order(3)
+	public void testGetAllStudent() throws Exception {
+		
+		// 1. Create a dummy request object[M.T,URL,C.T,C.B]
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+			.get("http://localhost:9999/v1/api/student/all");
+			
 
+		// 2. Send the request and get the response
+		MvcResult result = mockMvc.perform(request).andReturn();
+
+		// 3. Retrieve the data from request object to peform testing
+		MockHttpServletResponse response = result.getResponse();
+
+		// 4. use JUNIT to test wheter the testcase is pass|fail
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+		assertNotNull(response.getContentAsString());
+		String output = response.getContentAsString();
+		System.out.println(output);
+	}
+	
+	@Test
+	@DisplayName("UPDATE STUDENT DETAIlS")
+	@Order(4)
+	public void testUpdateStudent() throws Exception {
+		
+		String body = "{\n"
+				+ "    \"stdId\": 5,\n"
+				+ "    \"stdName\": \"Sher\",\n"
+				+ "    \"stdGen\": \"Male\",\n"
+				+ "    \"stdCourse\": \"Content\",\n"
+				+ "    \"stdAddr\": \"Up\"\n"
+				+ "}";
+		// 1. Create a dummy request object[M.T,URL,C.T,C.B]
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+			.put("http://localhost:9999/v1/api/student/modify")
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(body);
+			
+
+		// 2. Send the request and get the response
+		MvcResult result = mockMvc.perform(request).andReturn();
+
+		// 3. Retrieve the data from request object to peform testing
+		MockHttpServletResponse response = result.getResponse();
+
+		// 4. use JUNIT to test wheter the testcase is pass|fail
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+		assertNotNull(response.getContentAsString());
+		String output = response.getContentAsString();
+		System.out.println(output);
+	}
+	
+	
+	@Test
+	@DisplayName("DELETING STUDENT OBJECT")
+	@Order(5)
+	public void testDeleteStudent() throws Exception {
+		
+		// 1. Create a dummy request object[M.T,URL,C.T,C.B]
+		MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+			.delete("http://localhost:9999/v1/api/student/remove/{id}",5);
+			
+
+		// 2. Send the request and get the response
+		MvcResult result = mockMvc.perform(request).andReturn();
+
+		// 3. Retrieve the data from request object to peform testing
+		MockHttpServletResponse response = result.getResponse();
+
+		// 4. use JUNIT to test wheter the testcase is pass|fail
+		assertEquals(HttpStatus.OK.value(), response.getStatus());
+		assertNotNull(response.getContentAsString());
+		boolean isTrue = response.getContentAsString().contains("REMOVED");
+		if (!isTrue) {
+			fail("STUDENT NOT DELETED");
+		}
+	}
+		
 }
