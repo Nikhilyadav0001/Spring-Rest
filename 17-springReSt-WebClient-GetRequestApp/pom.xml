@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>nikhil</groupId>
-	<artifactId>15-SpringReST-RestTemplateApp-RQApp</artifactId>
+	<artifactId>17-springReSt-WebClient-GetRequestApp</artifactId>
 	<version>1.0</version>
-	<name>15-SpringReST-RestTemplateApp-RQApp</name>
+	<name>17-springReSt-WebClient-GetRequestApp</name>
 	<description/>
 	<url/>
 	<licenses>
@@ -32,9 +32,15 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc</artifactId>
+			<artifactId>spring-boot-starter-webflux</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -42,7 +48,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webmvc-test</artifactId>
+			<artifactId>spring-boot-starter-webflux-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

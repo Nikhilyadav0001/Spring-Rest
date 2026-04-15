@@ -9,23 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>nikhil</groupId>
-	<artifactId>15-SpringReST-RestTemplateApp-RQApp</artifactId>
+	<artifactId>16-springReSt-CurrencyServiceProvider</artifactId>
 	<version>1.0</version>
-	<name>15-SpringReST-RestTemplateApp-RQApp</name>
+	<name>16-springReSt-CurrencyServiceProvider</name>
 	<description/>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+	
 	<properties>
 		<java.version>25</java.version>
 	</properties>
@@ -35,6 +23,12 @@
 			<artifactId>spring-boot-starter-webmvc</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
